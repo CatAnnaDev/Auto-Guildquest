@@ -1,0 +1,15 @@
+{
+    "name": "Auto-Guildquest",
+    "options": {
+        "niceName": "Auto-Guildquest",
+        "guiName": "Auto-Guildquest",
+        "settingsFile": "config.json",
+        "settingsMigrator": "settings_migrator.js",
+        "settingsVersion": 1
+    },
+    "author": "PsykoDev",
+    "description": "Auto-Guildquest",
+    "servers": ["https://raw.githubusercontent.com/PsykoDev/Auto-Guildquest/master/"],
+    "supportUrl": "https://github.com/PsykoDev/Auto-Guildquest/issues",
+    "version": "90.2"
+}
