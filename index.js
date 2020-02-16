@@ -24,8 +24,12 @@ module.exports = function AutoGuildquest(mod) {
 				mod.settings.Guardian = !mod.settings.Guardian
 				sendMessage("Auto-Gardian-Legion: " + (mod.settings.Guardian ? "On" : "Off"));
 			  },
+			'DC': () => {
+				mod.settings.Daily = !mod.settings.Daily
+				sendMessage("Auto-Daily-Credit: " + (mod.settings.Daily ? "On" : "Off"));
+			  },
 			'$default': () => {
-				sendMessage(`Invalid argument. uasge : auto [VG|GQ|RL|GL]`);
+				sendMessage(`Invalid argument. uasge : auto [VG|GQ|RL|GL|DC]`);
 			}
 		  });
 	  
@@ -36,8 +40,13 @@ module.exports = function AutoGuildquest(mod) {
 			hold = false
 			completeQuest()
 			completeGuildQuest()
+			dailycredit()
 		}
 	})
+
+	mod.hook('S_LOGIN', 'event', () => {
+		dailycredit()
+	},
 
 	mod.hook('S_FIELD_EVENT_ON_ENTER', 'raw', () => {  
 		entered = true;
@@ -118,15 +127,26 @@ module.exports = function AutoGuildquest(mod) {
 		}
 		myQuestId = 0
 	}
-	function sendMessage(msg) { mod.command.message(msg) }
 
 	function completeGuardian() {
-            mod.send('C_REQUEST_FIELD_POINT_REWARD', 1, {
-            })
-            
-            mod.setTimeout(() => {
-                mod.send('C_REQUEST_ONGOING_FIELD_EVENT_LIST', 1, {
-                })
-            }, 3000)
-	}
+		mod.send('C_REQUEST_FIELD_POINT_REWARD', 1, {
+		})
+		
+		mod.setTimeout(() => {
+			mod.send('C_REQUEST_ONGOING_FIELD_EVENT_LIST', 1, {
+			})
+		}, 3000)
 }
+
+	function dailycredit() {
+		if (mod.settings.Daily) {
+			let _ = mod.trySend('C_REQUEST_RECV_DAILY_TOKEN', 1, {});
+			 !_ ? mod.log('Unmapped protocol packet \<C_REQUEST_RECV_DAILY_TOKEN\>.') : null;
+		  }
+	}
+
+function sendMessage(msg) { mod.command.message(msg) }
+}
+	
+
+

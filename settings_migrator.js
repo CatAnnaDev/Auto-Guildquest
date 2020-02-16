@@ -3,6 +3,7 @@ const DefaultSettings = {
     "GQuest": true, 
     "auto": true, 
     "Guardian": true,
+    "Daily": true,
     "battleground": [
         102,
         103, 

@@ -9,5 +9,5 @@ Auto | base command
 VQ | for enabled/disabled Auto-Vanguard
 GQ | for enabled/disabled Auto-Guild-Quest
 RL | for enabled/disabled Auto-Relaunch-Guild-Quest
-GL |  for enabled/disabled Auto claim box in Gardian legion
-
+GL | for enabled/disabled Auto claim box in Gardian legion
+DL | for enabled/disabled Auto claim Daily cradit 
