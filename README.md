@@ -2,7 +2,6 @@ Auto-Vanguard / Guild-Quest / Guadian Legion
 ---
 also adds a counter for completed missions as compensation in notice chat<br>
 ---
-======
 
 Commands | infos
 --- | ---
