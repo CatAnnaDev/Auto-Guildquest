@@ -1,8 +1,8 @@
 {
     "version": 1,
     "data": {
-        "enabledV": true, 
-        "enabledQ": true, 
+        "enabledV": true,
+        "enabledG": true,
         "auto": true,
         "battleground": [
             102,
