@@ -46,7 +46,7 @@ module.exports = function AutoGuildquest(mod) {
 
 	mod.hook('S_LOGIN', 'event', () => {
 		dailycredit()
-	},
+	}),
 
 	mod.hook('S_FIELD_EVENT_ON_ENTER', 'raw', () => {  
 		entered = true;
