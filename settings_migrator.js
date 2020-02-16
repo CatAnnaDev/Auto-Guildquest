@@ -1,6 +1,6 @@
 const DefaultSettings = {
     "enabledV": true, 
-    "enabledQ": true, 
+    "enabledG": true, 
     "auto": true, 
     "battleground": [
         102,
