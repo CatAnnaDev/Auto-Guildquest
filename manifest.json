@@ -1,12 +1,22 @@
 {
     "files": {
-        "index.js": "7a9d48ceac0e56c5df25e1241e4eff3d2f6e8eb4341705e85c7aca4b9819fe77",
+        "index.js": "68c516579b47d59047b76829b690acb1c5beb88c30f40622fc451ac42fbedb4b",
         "module.json": "eaa171901c2e1fb9cf95233ffc8d93781023bef43807cf5958bd2f454fb2d029",
         "settings_migrator.js": "c6aed048a4dd212ab64db0a010d81c7181605958f009ef88a647f839b729fb8f"
     },
     "defs": {
+        "S_FIELD_EVENT_ON_ENTER": 0,
+        "C_RETURN_TO_LOBBY": 0,
+        "S_COMPLETE_EVENT_MATCHING_QUEST": 1,
+        "S_FIELD_EVENT_PROGRESS_INFO": 1,
+        "S_UPDATE_GUILD_QUEST_STATUS": 1,
         "C_REQUEST_FINISH_GUILD_QUEST": 1,
+        "C_REQUEST_START_GUILD_QUEST": 1,
+        "S_FIELD_POINT_INFO": 1,
+        "C_COMPLETE_DAILY_EVENT": 1,
         "C_COMPLETE_EXTRA_EVENT": 1,
-        "S_COMPLETE_EVENT_MATCHING_QUEST": 1
+        "C_REQUEST_FIELD_POINT_REWARD": 1,
+        "C_REQUEST_ONGOING_FIELD_EVENT_LIST": 1
+        
     }
 }

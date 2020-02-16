@@ -1,31 +1,34 @@
 module.exports = function AutoGuildquest(mod) {
+
 	let myQuestId = 0,
 		status = 2,
 		progress = 0,
 		clr = 0,
 		entered = false,
 		hold = false;
-		
-	mod.command.add("AVQ", () => {
-		mod.settings.Vanguard = !mod.settings.Vanguard
-		sendMessage("Auto-Vanguardquest: " + (mod.settings.Vanguard ? "On" : "Off"))
-	})
 
-	mod.command.add("AGQ", () => {
-		mod.settings.GQuest = !mod.settings.GQuest
-		sendMessage("Auto-Guildquest: " + (mod.settings.GQuest ? "On" : "Off"))
-	})
-
-	mod.command.add("ARGQ", () => {
-		mod.settings.auto = !mod.settings.auto
-		sendMessage("Auto-Relaunch-Guildquest: " + (mod.settings.auto ? "On" : "Off"))
-	})
-
-	mod.command.add("AGL", () => {
-		mod.settings.Guardian = !mod.settings.Guardian
-		sendMessage("Auto-Gardian-Legion: " + (mod.settings.Guardian ? "On" : "Off"))
-	})
-	
+		mod.command.add('auto', {
+			'VG': () => {
+				mod.settings.Vanguard = !mod.settings.Vanguard
+				sendMessage("Auto-Vanguardquest: " + (mod.settings.Vanguard ? "On" : "Off"));
+			},
+			'GQ': () => {
+				mod.settings.GQuest = !mod.settings.GQuest
+				sendMessage("Auto-Guildquest: " + (mod.settings.GQuest ? "On" : "Off"));
+			},
+			'RL': () => {
+				mod.settings.auto = !mod.settings.auto
+				sendMessage("Auto-Relaunch-Guildquest: " + (mod.settings.auto ? "On" : "Off"));
+			},
+			'GL': () => {
+				mod.settings.Guardian = !mod.settings.Guardian
+				sendMessage("Auto-Gardian-Legion: " + (mod.settings.Guardian ? "On" : "Off"));
+			  },
+			'$default': () => {
+				sendMessage(`Invalid argument. uasge : auto [VG|GQ|RL|GL]`);
+			}
+		  });
+	  
 	mod.game.me.on('change_zone', (zone, quick) => {
 		if (mod.settings.battleground.includes(zone)) {
 			hold = true
