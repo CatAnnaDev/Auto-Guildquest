@@ -1,9 +1,10 @@
 {
     "files": {
-        "index.js": "95c2457f299a13e12cf6d1b5f94d7242c9d2120963d61792345d582d9f36a3fe",
+        "index.js": "f585f2f9365e6ede228a696b203e3f412e003a6deb72da7d7122d5234046de50",
         "module.json": "eaa171901c2e1fb9cf95233ffc8d93781023bef43807cf5958bd2f454fb2d029",
         "settings_migrator.js": "4b6e4bdd3d348948f22e5c093bc5a9f16e921e60a539ce908df98d3a87273571",
-        "README.md": "7240c0eb8c7ee75c97033b407a6a1b29dde0795f92d26cbc3437695878b7bae6"
+        "settings_structure.js": "f90068f6f7a5782d1e1643878bce84913b58f5c34d02db8f892d169f5f8cfe93",
+        "README.md": "4d1917b6ad522f751fa6f6bf2da7fcd2aba25911e9dab3b9851817aebd1106d5"
     },
     "defs": {
         "S_FIELD_EVENT_ON_ENTER": 0,

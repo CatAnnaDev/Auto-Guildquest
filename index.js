@@ -1,3 +1,5 @@
+const SettingsUI = require('tera-mod-ui').Settings;
+
 module.exports = function AutoGuildquest(mod) {
 
 	let myQuestId = 0,
@@ -27,6 +29,9 @@ module.exports = function AutoGuildquest(mod) {
 			'DC': () => {
 				mod.settings.Daily = !mod.settings.Daily
 				sendMessage("Auto-Daily-Credit: " + (mod.settings.Daily ? "On" : "Off"));
+			  },
+			'UI': () => {
+				ui.show();
 			  },
 			'$default': () => {
 				sendMessage(`Invalid argument. uasge : auto [VG|GQ|RL|GL|DC]`);
@@ -146,7 +151,22 @@ module.exports = function AutoGuildquest(mod) {
 	}
 
 function sendMessage(msg) { mod.command.message(msg) }
+
+let ui = null;
+if (global.TeraProxy.GUIMode) {
+	ui = new SettingsUI(mod, require('./settings_structure'), mod.settings, { height: 232 });
+	ui.on('update', settings => { mod.settings = settings; });
+
+	this.destructor = () => {
+		if (ui) {
+			ui.close();
+			ui = null;
+		}
+	};
 }
+}
+
+
 	
 
 
