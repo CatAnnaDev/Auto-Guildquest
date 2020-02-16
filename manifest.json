@@ -1,8 +1,8 @@
 {
     "files": {
-        "index.js": "501b36e6cc91b53b54237d29c95a26d3189b75aa120bb9f76633e230cb269ce2",
+        "index.js": "7a9d48ceac0e56c5df25e1241e4eff3d2f6e8eb4341705e85c7aca4b9819fe77",
         "module.json": "eaa171901c2e1fb9cf95233ffc8d93781023bef43807cf5958bd2f454fb2d029",
-        "settings_migrator.js": "649701c925d6b07b37547a5aa9ea536e62886c915783c01bf41cc9d0a735665f"
+        "settings_migrator.js": "c6aed048a4dd212ab64db0a010d81c7181605958f009ef88a647f839b729fb8f"
     },
     "defs": {
         "C_REQUEST_FINISH_GUILD_QUEST": 1,

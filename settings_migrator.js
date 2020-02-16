@@ -1,7 +1,8 @@
 const DefaultSettings = {
-    "enabledV": true, 
-    "enabledG": true, 
+    "Vanguard": true, 
+    "GQuest": true, 
     "auto": true, 
+    "Guardian": true,
     "battleground": [
         102,
         103, 
