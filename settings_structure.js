@@ -10,11 +10,6 @@ module.exports = [
         "type": "bool"
     },
     {
-        "key": "auto",
-        "name": "Auto Guild Quest",
-        "type": "bool"
-    },
-    {
         "key": "Guardian",
         "name": "Gardian Legion",
         "type": "bool"
