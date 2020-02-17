@@ -7,7 +7,7 @@ module.exports = function AutoGuildquest(mod) {
 		progress = 0,
 		clr = 0,
 		entered = false,
-		hold = false;
+		hold = false
 
 		mod.command.add('auto', {
 			'VG': () => {
@@ -47,11 +47,11 @@ module.exports = function AutoGuildquest(mod) {
 			completeGuildQuest()
 			dailycredit()
 		}
-	})
+	});
 
 	mod.hook('S_LOGIN', 'event', () => {
 		dailycredit()
-	}),
+	});
 
 	mod.hook('S_FIELD_EVENT_ON_ENTER', 'raw', () => {  
 		entered = true;
@@ -68,39 +68,34 @@ module.exports = function AutoGuildquest(mod) {
 			if (!hold) completeQuest()
 			return false
 		}
-	})
+	});
 
 	mod.hook('S_FIELD_EVENT_PROGRESS_INFO', 1, () => {
 		if (mod.settings.Guardian) {
 			completeGuardian()
 			return false
 		}
-	})
+	});
 
-	mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, () => {
-		if (mod.settings.GQuest) {
-			 completeGuildQuest()
-			return false
-		}
-	})
-	
-	function completeGuildQuest(event) {
+	mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
+		if (mod.settings.GQuest) return
 		if (event.targets[0].completed == event.targets[0].total) {
-            mod.send('C_REQUEST_FINISH_GUILD_QUEST', 1, {
-                quest: event.quest
-            })
-            if (mod.settings.auto) {
-            mod.setTimeout(() => {
-                mod.send('C_REQUEST_START_GUILD_QUEST', 1, {
-                    questId: event.quest
-                })
-            }, 3000)
+			mod.send('C_REQUEST_FINISH_GUILD_QUEST', 1, {
+				quest: event.quest
+			})
+			if (mod.settings.auto) {
+				mod.setTimeout(() => {
+					mod.send('C_REQUEST_START_GUILD_QUEST', 1, {
+						questId: event.quest
+						})
+					}, 3000)
+			}
 		}
-		}
-	}
+		
+	});
 
 	mod.hook('S_FIELD_POINT_INFO', 2, (event) => {       
-		if(entered && event.cleared != clr && event.cleared - 1 > event.claimed) 
+		if(entered && event.cleared != clr && event.cleared - 1 > event.claimed)
 		{
 			mod.toClient('S_CHAT', 3, {
 			channel: 21,
@@ -131,7 +126,7 @@ module.exports = function AutoGuildquest(mod) {
 			
 		}
 		myQuestId = 0
-	}
+	};
 
 	function completeGuardian() {
 		mod.send('C_REQUEST_FIELD_POINT_REWARD', 1, {
@@ -141,14 +136,14 @@ module.exports = function AutoGuildquest(mod) {
 			mod.send('C_REQUEST_ONGOING_FIELD_EVENT_LIST', 1, {
 			})
 		}, 3000)
-}
+};
 
 	function dailycredit() {
 		if (mod.settings.Daily) {
 			let _ = mod.trySend('C_REQUEST_RECV_DAILY_TOKEN', 1, {});
 			 !_ ? mod.log('Unmapped protocol packet \<C_REQUEST_RECV_DAILY_TOKEN\>.') : null;
 		  }
-	}
+	};
 
 function sendMessage(msg) { mod.command.message(msg) }
 
