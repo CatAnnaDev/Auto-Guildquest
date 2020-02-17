@@ -61,13 +61,13 @@ mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
 			mod.send('C_REQUEST_FINISH_GUILD_QUEST', 1, {
 				quest: event.quest
 			})
-			mod.command.message('finish: ' + event.quest)
+			sendMessage('finish: ' + event.quest)
 			
 			mod.setTimeout(() => {
 				mod.send('C_REQUEST_START_GUILD_QUEST', 1, {
 					questId: event.quest
 				})
-				mod.command.message('launch: ' + event.quest)
+				sendMessage('launch: ' + event.quest)
 			}, 3000)
 		}
 		return false
