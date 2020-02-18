@@ -28,12 +28,14 @@ module.exports = function AutoGuildquest(mod) {
 
 //Daily
 	mod.hook('S_LOGIN', 'event', () => {
-		dailycredit()
+		mod.hookOnce('S_SPAWN_ME', 'event', () => {
+			setTimeout(dailycredit,1000+ Math.random()*250);
+		});
 	});
 //Guardian
 	mod.hook('S_FIELD_EVENT_ON_ENTER', 'raw', () => {  
 		entered = true;
-		return false;
+		//return false;
 	});
 //Guardian
 	mod.hook('C_RETURN_TO_LOBBY', 'raw', () => {  
@@ -43,34 +45,33 @@ module.exports = function AutoGuildquest(mod) {
 	mod.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, (event) => {
 		if (mod.settings.Vanguard) {
 			myQuestId = event.id
-			if (!hold) completeQuest()
-			return false
+			if (!hold) setTimeout(completeQuest,1000+ Math.random()*250);
+			//return false;
 		}
 	});
 //Guardian
 	mod.hook('S_FIELD_EVENT_PROGRESS_INFO', 1, () => {
-		if (mod.settings.Guardian) {
-			completeGuardian()
-			return false
-		}
+		if (mod.settings.Guardian) setTimeout(completeGuardian, 2000+ Math.random()*250);
 	});
 //Gquest
 mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
 	if (mod.settings.GQuest) {
 		if (event.targets[0].completed == event.targets[0].total) {
+			setTimeout(()=>{
 			mod.send('C_REQUEST_FINISH_GUILD_QUEST', 1, {
 				quest: event.quest
 			})
 			sendMessage('finish: ' + event.quest)
+			}, 2000 + Math.random()*1000)
 			
-			mod.setTimeout(() => {
+			setTimeout(() => {
 				mod.send('C_REQUEST_START_GUILD_QUEST', 1, {
 					questId: event.quest
 				})
 				sendMessage('launch: ' + event.quest)
-			}, 3000)
+			}, 4000 + Math.random()*1000)
 		}
-		return false
+		//return false;
 	}
 })
 //Guardian
@@ -91,31 +92,26 @@ mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
 		mod.send('C_COMPLETE_DAILY_EVENT', 1, {
 			id: myQuestId
 		})
-		try {
-			setTimeout(() => {
-				mod.send('C_COMPLETE_EXTRA_EVENT', 1, {
-					type: 0
-				})
-			}, 500)
-			setTimeout(() => {
-				mod.send('C_COMPLETE_EXTRA_EVENT', 1, {
-					type: 1
-				})
-			}, 500)
-		} catch (e) {
-			
-		}
+		setTimeout(() => {
+			mod.send('C_COMPLETE_EXTRA_EVENT', 1, {
+				type: 0
+			})
+		}, 500+ Math.random()*250)
+		setTimeout(() => {
+			mod.send('C_COMPLETE_EXTRA_EVENT', 1, {
+				type: 1
+			})
+		}, 1000+ Math.random()*250)
 		myQuestId = 0
 	};
 //Guardian
 	function completeGuardian() {
 		mod.send('C_REQUEST_FIELD_POINT_REWARD', 1, {
 		})
-		
-		mod.setTimeout(() => {
+		setTimeout(() => {
 			mod.send('C_REQUEST_ONGOING_FIELD_EVENT_LIST', 1, {
 			})
-		}, 3000)
+		}, 2000+ Math.random()*500)
 };
 //Daily
 	function dailycredit() {
@@ -161,7 +157,7 @@ mod.command.add('auto', {
 		ui.show();
 	  },
 	'$default': () => {
-		sendMessage(`Invalid argument. uasge : auto [VG|GQ|RL|GL|DC]`);
+		sendMessage(`Invalid argument. usasge : auto [VG|GQ|RL|GL|DC]`);
 	}
   });
 }
