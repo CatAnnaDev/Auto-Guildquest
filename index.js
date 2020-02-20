@@ -1,4 +1,8 @@
+'use strict'
+String.prototype.clr = function (hexColor) { return `<font color='#${hexColor}'>${this}</font>` };
+
 const SettingsUI = require('tera-mod-ui').Settings;
+const Quests = require("./quests.json");
 
 module.exports = function AutoGuildquest(mod) {
 
@@ -25,6 +29,12 @@ module.exports = function AutoGuildquest(mod) {
               console.log(msg);
         }
 	}); */
+//GquestLog
+	mod.hook("S_GUILD_QUEST_LIST", 1, (event) => {
+		if (mod.settings.GQuestLog) {
+			GetQuestsInfo(event["quests"]);
+		}
+	})
 
 //Daily
 	mod.hook('S_LOGIN', 'event', () => {
@@ -54,26 +64,24 @@ module.exports = function AutoGuildquest(mod) {
 		if (mod.settings.Guardian) setTimeout(completeGuardian, 2000+ Math.random()*250);
 	});
 //Gquest
-mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
-	if (mod.settings.GQuest) {
-		if (event.targets[0].completed == event.targets[0].total) {
-			setTimeout(()=>{
-			mod.send('C_REQUEST_FINISH_GUILD_QUEST', 1, {
-				quest: event.quest
-			})
-			sendMessage('finish: ' + event.quest)
-			}, 2000 + Math.random()*1000)
-			
-			setTimeout(() => {
-				mod.send('C_REQUEST_START_GUILD_QUEST', 1, {
-					questId: event.quest
+	mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
+		if (mod.settings.GQuest) {
+			if (event.targets[0].completed == event.targets[0].total) {
+				setTimeout(()=>{
+				mod.send('C_REQUEST_FINISH_GUILD_QUEST', 1, {
+					quest: event.quest
 				})
-				sendMessage('launch: ' + event.quest)
-			}, 4000 + Math.random()*1000)
+				}, 2000 + Math.random()*1000)
+				
+				setTimeout(() => {
+					mod.send('C_REQUEST_START_GUILD_QUEST', 1, {
+						questId: event.quest
+					})
+				}, 4000 + Math.random()*1000)
+			}
+			//return false;
 		}
-		//return false;
-	}
-})
+	})
 //Guardian
 	mod.hook('S_FIELD_POINT_INFO', 2, (event) => {       
 		if(entered && event.cleared != clr && event.cleared - 1 > event.claimed)
@@ -120,47 +128,77 @@ mod.hook('S_UPDATE_GUILD_QUEST_STATUS', 1, (event) => {
 			 !_ ? mod.log('Unmapped protocol packet \<C_REQUEST_RECV_DAILY_TOKEN\>.') : null;
 		  }
 	};
-//Msg
-function sendMessage(msg) { mod.command.message(msg) }
-//Ui
-let ui = null;
-if (global.TeraProxy.GUIMode) {
-	ui = new SettingsUI(mod, require('./settings_structure'), mod.settings, { alwaysOnTop: true, width: 550, height: 200 });
-	ui.on('update', settings => { mod.settings = settings; });
 
-	this.destructor = () => {
-		if (ui) {
-			ui.close();
-			ui = null;
+//GquestLog
+	function GetQuestsInfo(questEvent) {
+		for (let questIndex in questEvent) {
+			if ([1, 2].includes(questEvent[questIndex]["status"])) {
+				let qName = questEvent[questIndex]["name"].replace("@GuildQuest:", "");
+				let qSize = GetQuestSize(questEvent[questIndex]["size"]);
+				let qStatus = `${questEvent[questIndex]["status"] == 1 ? "[ACTIVE]".clr("f1ef48") : "[COMPLETE]".clr("3fce29")}`;
+				let qTime = new Date(1000 * questEvent[questIndex]["timeRemaining"]).toISOString().substr(11, 8);
+				mod.command.message(`${qStatus} ${Quests[qName].clr("0cccd6")} ${qSize.clr("0c95d4")} Time left: ${qTime.clr("db3dce")}`)
+		} else {
+			continue
 		}
-	};
-}
-//Command
-mod.command.add('auto', {
-	'VG': () => {
-		mod.settings.Vanguard = !mod.settings.Vanguard
-		sendMessage("Auto-Vanguardquest: " + (mod.settings.Vanguard ? "On" : "Off"));
-	},
-	'GQ': () => {
-		mod.settings.GQuest = !mod.settings.GQuest
-		sendMessage("Auto-Guildquest: " + (mod.settings.GQuest ? "On" : "Off"));
-	},
-	'GL': () => {
-		mod.settings.Guardian = !mod.settings.Guardian
-		sendMessage("Auto-Gardian-Legion: " + (mod.settings.Guardian ? "On" : "Off"));
-	  },
-	'DC': () => {
-		mod.settings.Daily = !mod.settings.Daily
-		sendMessage("Auto-Daily-Credit: " + (mod.settings.Daily ? "On" : "Off"));
-	  },
-	'UI': () => {
-		ui.show();
-	  },
-	'$default': () => {
-		sendMessage(`Invalid argument. usasge : auto [VG|GQ|RL|GL|DC]`);
 	}
-  });
 }
+//GquestLog
+	function GetQuestSize(size) {
+		if (size == 0) {
+			return "(Small)"
+		} else if (size == 1) {
+			return "(Medium)"
+		} else {
+			return "(Large)"
+		}
+	}
+
+//Msg
+	function sendMessage(msg) { mod.command.message(msg) }
+//Ui
+	let ui = null;
+	if (global.TeraProxy.GUIMode) {
+		ui = new SettingsUI(mod, require('./settings_structure'), mod.settings, { alwaysOnTop: true, width: 550, height: 232 });
+		ui.on('update', settings => { mod.settings = settings; });
+
+		this.destructor = () => {
+			if (ui) {
+				ui.close();
+				ui = null;
+			}
+		};
+	}
+//Command
+	mod.command.add('auto', {
+		'VG': () => {
+			mod.settings.Vanguard = !mod.settings.Vanguard
+			sendMessage("Auto-Vanguardquest: " + (mod.settings.Vanguard ? "On" : "Off"));
+		},
+		'GQ': () => {
+			mod.settings.GQuest = !mod.settings.GQuest
+			sendMessage("Auto-Guildquest: " + (mod.settings.GQuest ? "On" : "Off"));
+		},
+		'GQLog': () => {
+			mod.settings.Guardian = !mod.settings.Guardian
+			sendMessage("Guildquest-Logger: " + (mod.settings.GQuestLog ? "On" : "Off"));
+		},
+		'GL': () => {
+			mod.settings.Guardian = !mod.settings.Guardian
+			sendMessage("Auto-Gardian-Legion: " + (mod.settings.Guardian ? "On" : "Off"));
+		},
+		'DC': () => {
+			mod.settings.Daily = !mod.settings.Daily
+			sendMessage("Auto-Daily-Credit: " + (mod.settings.Daily ? "On" : "Off"));
+		},
+		'UI': () => {
+			ui.show();
+		},
+		'$default': () => {
+			sendMessage(`Invalid argument. usasge : auto [VG|GQ|RL|GL|DC]`);
+		}
+	});
+	}
 
 
 	

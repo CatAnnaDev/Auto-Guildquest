@@ -10,6 +10,11 @@ module.exports = [
         "type": "bool"
     },
     {
+        "key": "GQuestLog",
+        "name": "Guild Quest Logger",
+        "type": "bool"
+    },
+    {
         "key": "Guardian",
         "name": "Gardian Legion",
         "type": "bool"

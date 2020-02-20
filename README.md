@@ -8,7 +8,8 @@ Commands | infos
 Auto | base command
 UI | Show the ui setting
 VQ | for enabled/disabled Auto-Vanguard
-GQ | for enabled/disabled Auto-Guild-Quest with relaunch
+GQ | for enabled/disabled Auto-GuildQuest with relaunch
+GQLog | for enabled/disabled GuildQuest-Logger
 GL | for enabled/disabled Auto claim box in Gardian legion
 DL | for enabled/disabled Auto claim Daily cradit 
 

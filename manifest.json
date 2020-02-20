@@ -1,10 +1,11 @@
 {
     "files": {
-        "index.js": "cbc07141496264c9a78c13bf633964730a28e80268a03ec1fd3dc8e2d470c523",
+        "index.js": "e49d076c1f91849e21ae9f95fe447af309aba52852a4230cf8cd80a11429b7e4",
         "module.json": "eaa171901c2e1fb9cf95233ffc8d93781023bef43807cf5958bd2f454fb2d029",
-        "settings_migrator.js": "d7f0047d6585aadc3ceb6991f716758817c9249b426cb13b115f2a9471e1c5d1",
-        "settings_structure.js": "58a983d607153438d47c7df71a32b1aa60fc2b70f387292af0cc0b51ebefee6a",
-        "README.md": "363d20cf37e90dc11111d38233b6d1d1d3b67de32bbfde52128a30895641ef78"
+        "quests.json": "ce99f18eb0a0e6ec450a8b3716a015b8c937e59808f088673d030629751e22c8",
+        "settings_migrator.js": "bc40e3d86eeea2ca975f38375950a429bf73c8770e4a389e4e1f4a64e86562ab",
+        "settings_structure.js": "a21ba5b0ee3872fef9b9324c784068ba3e7204c9ad70d4ccf6b209185079dcc5",
+        "README.md": "9e9514aa129401d9a24b9e1c1ce29b644c7da5134147980125555965d8a8d9c5"
     },
     "defs": {
         "S_FIELD_EVENT_ON_ENTER": 0,
@@ -19,7 +20,7 @@
         "C_COMPLETE_EXTRA_EVENT": 1,
         "C_REQUEST_FIELD_POINT_REWARD": 1,
         "C_REQUEST_ONGOING_FIELD_EVENT_LIST": 1,
-        "C_REQUEST_RECV_DAILY_TOKEN": 1
-        
+        "C_REQUEST_RECV_DAILY_TOKEN": 1,
+        "S_GUILD_QUEST_LIST": 1        
     }
 }

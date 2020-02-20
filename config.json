@@ -3,6 +3,7 @@
     "data": {
         "Vanguard": true,
         "GQuest": true,
+        "GQuestLog": true,
         "Guardian": true,
         "Daily": true,
         "battleground": [
