@@ -30,7 +30,7 @@ module.exports = function AutoGuildquest(mod) {
         }
 	}); */
 //GquestLog
-	mod.hook("S_GUILD_QUEST_LIST", 1, (event) => {
+	mod.hook("S_GUILD_QUEST_LIST", 2, (event) => {
 		if (mod.settings.GQuestLog) {
 			GetQuestsInfo(event["quests"]);
 		}
