@@ -28,13 +28,13 @@ module.exports = function AutoGuildquest(mod) {
         if (msg) {
               console.log(msg);
         }
-	}); */
+	}); 
 //GquestLog
-	mod.hook("S_GUILD_QUEST_LIST", 1, (event) => {
+	 mod.hook("S_GUILD_QUEST_LIST", 1, (event) => {
 		if (mod.settings.GQuestLog) {
 			GetQuestsInfo(event["quests"]);
 		}
-	})
+	}) */
 
 //Daily
 	mod.hook('S_LOGIN', 'event', () => {
@@ -130,7 +130,7 @@ module.exports = function AutoGuildquest(mod) {
 	};
 
 //GquestLog
-	function GetQuestsInfo(questEvent) {
+/*	function GetQuestsInfo(questEvent) {
 		for (let questIndex in questEvent) {
 			if ([1, 2].includes(questEvent[questIndex]["status"])) {
 				let qName = questEvent[questIndex]["name"].replace("@GuildQuest:", "");
@@ -142,7 +142,7 @@ module.exports = function AutoGuildquest(mod) {
 			continue
 		}
 	}
-}
+} */
 //GquestLog
 	function GetQuestSize(size) {
 		if (size == 0) {
