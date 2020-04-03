@@ -2,8 +2,8 @@ Auto-Vanguard / Guild-Quest / Guadian Legion / Daily cradit
 ---
 also adds a counter for completed missions as compensation in notice chat<br>
 ---
-NA = S_GUILD_QUEST_LIST 57096 <br>
-EU = S_GUILD_QUEST_LIST = 28597
+NA = DOESN'T WORK FOR 91.4<br>
+EU = S_GUILD_QUEST_LIST = 60186 92.3
 ---
 
 Commands | infos
