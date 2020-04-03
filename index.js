@@ -33,13 +33,13 @@ module.exports = function AutoGuildquest(mod) {
         if (msg) {
               console.log(msg);
         }
-	}); 
+	}); */
 //GquestLog
 	 mod.hook("S_GUILD_QUEST_LIST", 1, (event) => {
 		if (mod.settings.GQuestLog) {
 			GetQuestsInfo(event["quests"]);
 		}
-	}) */
+	})
 //Vquestlog
 	mod.game.on('enter_game', () => {
 		daily = weekly = 0
@@ -154,7 +154,7 @@ module.exports = function AutoGuildquest(mod) {
 	};
 
 //GquestLog
-/*	function GetQuestsInfo(questEvent) {
+	function GetQuestsInfo(questEvent) {
 		for (let questIndex in questEvent) {
 			if ([1, 2].includes(questEvent[questIndex]["status"])) {
 				let qName = questEvent[questIndex]["name"].replace("@GuildQuest:", "");
@@ -177,7 +177,7 @@ module.exports = function AutoGuildquest(mod) {
 			return "(Large)"
 		}
 	}
-*/
+
 //Msg
 	function sendMessage(msg) { mod.command.message(msg) }
 //Ui

@@ -4,7 +4,7 @@
         "Vanguard": true,
         "GQuest": true,
         "VLog": true,
-        "GQuestLog": false,
+        "GQuestLog": true,
         "Guardian": true,
         "Daily": true,
         "battleground": [
@@ -18,6 +18,5 @@
             118,
             119
         ]
-        
     }
 }
