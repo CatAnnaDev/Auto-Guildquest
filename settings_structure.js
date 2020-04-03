@@ -15,6 +15,11 @@ module.exports = [
         "type": "bool"
     },
     {
+        "key": "VLog",
+        "name": "Vanguard Quest Logger",
+        "type": "bool"
+    },
+    {
         "key": "Guardian",
         "name": "Gardian Legion",
         "type": "bool"

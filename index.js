@@ -11,7 +11,11 @@ module.exports = function AutoGuildquest(mod) {
 		progress = 0,
 		clr = 0,
 		entered = false,
-		hold = false
+		hold = false,
+		//vquest log
+		daily = 0,
+		weekly = 0,
+		niceName = mod.proxyAuthor !== 'caali' ? '[VG] ' : ''
 	  
 	mod.game.me.on('change_zone', (zone, quick) => {
 		if (mod.settings.battleground.includes(zone)) {
@@ -20,6 +24,7 @@ module.exports = function AutoGuildquest(mod) {
 			hold = false
 			completeQuest()
 			dailycredit()
+			CompleteExtra()
 		}
 	});
 //thx Kygas 
@@ -35,6 +40,15 @@ module.exports = function AutoGuildquest(mod) {
 			GetQuestsInfo(event["quests"]);
 		}
 	}) */
+//Vquestlog
+	mod.game.on('enter_game', () => {
+		daily = weekly = 0
+	})
+
+	mod.hookOnce('S_AVAILABLE_EVENT_MATCHING_LIST', 1, event => {
+		daily = event.unk4
+		weekly = event.unk6
+	})
 
 //Daily
 	mod.hook('S_LOGIN', 'event', () => {
@@ -53,6 +67,8 @@ module.exports = function AutoGuildquest(mod) {
 	});
 //Vandguard	
 	mod.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, (event) => {
+		daily++
+		weekly++
 		if (mod.settings.Vanguard) {
 			myQuestId = event.id
 			if (!hold) setTimeout(completeQuest,1000+ Math.random()*250);
@@ -99,7 +115,7 @@ module.exports = function AutoGuildquest(mod) {
 	function completeQuest() {
 		mod.send('C_COMPLETE_DAILY_EVENT', 1, {
 			id: myQuestId
-		})
+		})	
 		setTimeout(() => {
 			mod.send('C_COMPLETE_EXTRA_EVENT', 1, {
 				type: 0
@@ -111,7 +127,15 @@ module.exports = function AutoGuildquest(mod) {
 			})
 		}, 1000+ Math.random()*250)
 		myQuestId = 0
-	};
+		if(mod.settings.VLog) report() 
+		
+	}; 
+
+	function report() {
+		if(daily < 16) mod.command.message(niceName + 'Daily Vanguard Requests completed: ' + daily)
+		else mod.command.message(niceName + 'You have completed all 16 Vanguard Requests today.')
+	}
+
 //Guardian
 	function completeGuardian() {
 		mod.send('C_REQUEST_FIELD_POINT_REWARD', 1, {
@@ -142,7 +166,7 @@ module.exports = function AutoGuildquest(mod) {
 			continue
 		}
 	}
-} */
+} 
 //GquestLog
 	function GetQuestSize(size) {
 		if (size == 0) {
@@ -153,7 +177,7 @@ module.exports = function AutoGuildquest(mod) {
 			return "(Large)"
 		}
 	}
-
+*/
 //Msg
 	function sendMessage(msg) { mod.command.message(msg) }
 //Ui
@@ -180,7 +204,7 @@ module.exports = function AutoGuildquest(mod) {
 			sendMessage("Auto-Guildquest: " + (mod.settings.GQuest ? "On" : "Off"));
 		},
 		'GQLog': () => {
-			mod.settings.Guardian = !mod.settings.Guardian
+			mod.settings.GQuestLog = !mod.settings.GQuestLog
 			sendMessage("Guildquest-Logger: " + (mod.settings.GQuestLog ? "On" : "Off"));
 		},
 		'GL': () => {
@@ -190,6 +214,10 @@ module.exports = function AutoGuildquest(mod) {
 		'DC': () => {
 			mod.settings.Daily = !mod.settings.Daily
 			sendMessage("Auto-Daily-Credit: " + (mod.settings.Daily ? "On" : "Off"));
+		},
+		'VGLog': () => {
+			mod.settings.VLog = !mod.settings.VLog
+			sendMessage("Vanguard-quest Logger: " + (mod.settings.VLog ? "On" : "Off"));
 		},
 		'UI': () => {
 			ui.show();

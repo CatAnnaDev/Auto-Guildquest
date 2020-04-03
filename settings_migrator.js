@@ -1,6 +1,7 @@
 const DefaultSettings = {
     "Vanguard": true, 
     "GQuest": true,
+    "VLog": true,
     "GQuestLog": true,
     "Guardian": true,
     "Daily": true,
