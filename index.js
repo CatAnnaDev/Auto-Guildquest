@@ -217,13 +217,20 @@ module.exports = function AutoGuildquest(mod) {
 		},
 		'VGLog': () => {
 			mod.settings.VLog = !mod.settings.VLog
-			sendMessage("Vanguard-quest Logger: " + (mod.settings.VLog ? "On" : "Off"));
+			sendMessage("Vanguard-Quest Logger: " + (mod.settings.VLog ? "On" : "Off"));
 		},
 		'UI': () => {
 			ui.show();
 		},
 		'$default': () => {
-			sendMessage(`Invalid argument. usasge : auto [VG|GQ|RL|GL|DC]`);
+			sendMessage(`Invalid argument. usasge command with 'auto'`),
+			sendMessage(`UI | Show the ui setting`),
+			sendMessage(`VQ | Auto-Vanguard`),
+			sendMessage(`GQ | Auto-GuildQuest with relaunch`),
+			sendMessage(`GQLog |Guild-Quest-Logger`),
+			sendMessage(`VGLog |Vanguard-Quest-Logger`),
+			sendMessage(`GL |Auto claim box in Gardian legion`),
+			sendMessage(`DL |Auto claim Daily cradit `);
 		}
 	});
 	}
