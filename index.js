@@ -33,13 +33,13 @@ module.exports = function AutoGuildquest(mod) {
         if (msg) {
               console.log(msg);
         }
-	}); */
+	}); 
 //GquestLog
 	 mod.hook("S_GUILD_QUEST_LIST", 1, (event) => {
 		if (mod.settings.GQuestLog) {
 			GetQuestsInfo(event["quests"]);
 		}
-	})
+	})*/
 //Vquestlog
 	mod.game.on('enter_game', () => {
 		daily = weekly = 0
@@ -154,7 +154,7 @@ module.exports = function AutoGuildquest(mod) {
 	};
 
 //GquestLog
-	function GetQuestsInfo(questEvent) {
+/*	function GetQuestsInfo(questEvent) {
 		for (let questIndex in questEvent) {
 			if ([1, 2].includes(questEvent[questIndex]["status"])) {
 				let qName = questEvent[questIndex]["name"].replace("@GuildQuest:", "");
@@ -176,7 +176,7 @@ module.exports = function AutoGuildquest(mod) {
 		} else {
 			return "(Large)"
 		}
-	}
+	}*/
 
 //Msg
 	function sendMessage(msg) { mod.command.message(msg) }
@@ -203,10 +203,6 @@ module.exports = function AutoGuildquest(mod) {
 			mod.settings.GQuest = !mod.settings.GQuest
 			sendMessage("Auto-Guildquest: " + (mod.settings.GQuest ? "On" : "Off"));
 		},
-		'GQLog': () => {
-			mod.settings.GQuestLog = !mod.settings.GQuestLog
-			sendMessage("Guildquest-Logger: " + (mod.settings.GQuestLog ? "On" : "Off"));
-		},
 		'GL': () => {
 			mod.settings.Guardian = !mod.settings.Guardian
 			sendMessage("Auto-Gardian-Legion: " + (mod.settings.Guardian ? "On" : "Off"));
@@ -227,7 +223,6 @@ module.exports = function AutoGuildquest(mod) {
 			sendMessage(`UI | Show the ui setting`),
 			sendMessage(`VQ | Auto-Vanguard`),
 			sendMessage(`GQ | Auto-GuildQuest with relaunch`),
-			sendMessage(`GQLog |Guild-Quest-Logger`),
 			sendMessage(`VGLog |Vanguard-Quest-Logger`),
 			sendMessage(`GL |Auto claim box in Gardian legion`),
 			sendMessage(`DL |Auto claim Daily cradit `);
