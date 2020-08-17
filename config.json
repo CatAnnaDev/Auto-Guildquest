@@ -3,7 +3,7 @@
     "data": {
         "Vanguard": true,
         "GQuest": true,
-        "VLog": true,
+        "VLog": false,
         "GQuestLog": false,
         "Guardian": true,
         "Daily": true,

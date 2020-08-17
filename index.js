@@ -13,8 +13,7 @@ module.exports = function AutoGuildquest(mod) {
 		entered = false,
 		hold = false,
 		daily = 0,
-		weekly = 0,
-		niceName = mod.proxyAuthor !== 'caali' ? '[VG] ' : ''
+		weekly = 0
 	  
 	mod.game.me.on('change_zone', (zone, quick) => {
 		if (mod.settings.battleground.includes(zone)) {
