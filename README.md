@@ -1,7 +1,7 @@
 Auto-Vanguard / Guild-Quest / Guadian Legion / Daily cradit
 ---
 also adds a counter for completed missions as compensation in notice chat<br>
-
+Pinkie Pie's Version https://github.com/neko-org/Auto-Guildquest
 ---
 
 Commands | infos
